@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Referrals</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+</head>
+<body style="background-color: whitesmoke;">
+    <div style="margin-top: 50px;" class="ui container">
+    
+    <h1 class="ui center aligned header">AFMC Dental Referrals List</h1>
+
+    <form class="ui form" action="/add" method="post">
+        <div class="field">
+            <label for="title">Name:</label>
+            <input type="text" style="margin-bottom: 5px" name="title" placeholder="Enter name...">
+            <label for="title">Phone:</label>
+            <input type="text" style="margin-bottom: 5px" name="phone" placeholder="Enter phone...">
+            <label for="title">Language:</label>
+            <input type="text" style="margin-bottom: 5px" name="language" placeholder="Enter primary language...">
+            <br>
+            <button class="ui blue button" type="submit" style="margin-bottom: 20px;">Add</button>
+        </div>
+    </form>
+
+    {% for todo in todo_list %}
+    <div class="ui segment">
+        <p class="ui big header"> {{ todo.id }} - {{ todo.title }}, {{ todo.phone }}, {{ todo.language }}  </p>
+
+        {% if todo.complete == False %}
+            <span class="ui gray label">Not Complete</span>
+        {% else %}
+            <span class="ui green label">Completed</span>
+        {% endif %}
+
+        <a class="ui green button" href="/update/{{ todo.id }}">Update</a>
+        <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+    </div>
+    {% endfor %}
+    </div>
+</body>
+</html>
